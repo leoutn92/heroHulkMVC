@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html layout:decorator="layout/layout" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block layout:fragment="content">
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Add new article</div>
+                <div class="panel-body">
+                    <form method="post" class="form-group" action="/manager/article">
+                        <div class="form-group">
+                            <label>hero</label>
+                            <select name="heroName" id="heroName">
+                                <option th:each="hero : ${heroes}"
+                                        th:value="${hero.getName()}"
+                                        th:text="${hero.getName()}">hero</option>
+                            </select>
+                            <a href="/hero">Add a new hero</a>
+                        </div>
+
+                        <div class="form-group">
+                            <label>article type</label>
+                            <select name="article_type" id="article_type">
+                                <option value="TShirt">TShirt</option>
+                                <option value="Cup">Cup</option>
+                                <option value="Comics">Comic</option>
+                                <option value="Toy">Toy</option>
+                                <option value="Another">Another</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>size: </label>
+                            <select name="size" id="size">
+                                <option value="NA">NA</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" placeholder="current stock" type="number" name="stock" id="stock"
+                                   maxlength="10"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input placeholder="price" type="money" name="price" size="10"/>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea name="description" id="description" placeholder="Description"></textarea>
+                        </div>
+
+                        <input class="btn btn-primary" type="submit" value="Save"/>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Article List</div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>article code</th>
+                            <th>article type</th>
+                            <th>heroe</th>
+                            <th>size</th>
+                            <th>price</th>
+                            <th>stock</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="article : ${articles}">
+                            <td th:text="${article.getArticleCode()}">Article code</td>
+                            <td th:text="${article.getArticleType()}">Name</td>
+                            <td th:text="${article.getHero()}">Hero</td>
+                            <td th:text="${article.getSize()}">Size</td>
+                            <td th:text="${article.getPrice()}">Price</td>
+                            <td th:text="${article.getStock()}">Stock</td>
+                            <td><a th:href="${'/manager/change/price/' + article.getArticleCode()}"><button>change price</button></a></td>
+                            <td><a th:href="${'/manager/change/stock/' + article.getArticleCode()}"><button>change stock</button></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>
