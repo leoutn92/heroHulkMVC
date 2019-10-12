@@ -55,7 +55,7 @@ public class SaleServiceTest {
             .articleCode(2)
             .unitPrice(20).build();
 
-    private Set<ArticleSold> articlesSold = new HashSet<>(asList(articleSold1, articleSold2));
+    private Set<ArticleSold> articlesSold;
 
     private Sale sale;
 
@@ -68,6 +68,8 @@ public class SaleServiceTest {
                 .amountSold(1)
                 .articleCode(1)
                 .unitPrice(10).build();
+
+        articlesSold = new HashSet<>(asList(articleSold1, articleSold2));
 
         sale = Sale.builder().saleCode(1)
                 .saleDate(DATE_TEST)
